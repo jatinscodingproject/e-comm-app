@@ -14,6 +14,8 @@ const contactusRoutes = require('./routes/contact-us')
 
 const successRoutes = require('./routes/success')
 
+const productControllers = require('./controllers/product')
+
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname,'public')));
@@ -26,8 +28,6 @@ app.use(contactusRoutes);
 
 app.use(successRoutes)
 
-app.use((req,res,next) => {
-    res.status(404).sendFile(path.join(__dirname,'./','views','404page.html'))
-});
+app.use(productControllers.get404);
 
 app.listen(3000)
